@@ -3,7 +3,7 @@ python tornado frontend for OpenIO SDS
 
 A web server to access to your OpenIO data: http://ip:port/container/object
 
-You will need an OpenIO cluster up and rucan try the docker container http://docs.openio.io/docker-image/)
+You will need an OpenIO cluster up and running, you can try the docker container http://docs.openio.io/docker-image/)
 
 This is a demo, feel free to improve it.
 
