@@ -1,6 +1,8 @@
 # oio-frontend
 python tornado frontend for OpenIO SDS
 
+A web server to access to your OpenIO data: http://ip:port/container/object
+
 This is a demo, feel free to improve it.
 
 ```sh
