@@ -23,6 +23,8 @@ Setup
 pip install tornado
 ```
 
+Install OpenIO SDS SDK
+
 Debian/Ubuntu:
 
 ```sh
