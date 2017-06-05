@@ -15,9 +15,24 @@ from tornado.log import enable_pretty_logging
 import json
 import time
 import cStringIO as StringIO
+import optparse
 
-OIONS = "OPENIO"
-OIOACCOUNT = "ACCOUNT_WRITE"
+
+def parse():
+    parser = optparse.OptionParser()
+    parser.add_option("-n", "--namespace", help="Namespace to use")
+    parser.add_option("-u", "--url", help="OIO-Proxy IP:PORT")
+    parser.add_option("-a", "--account", help="Account to use")
+    parser.add_option("-p", "--port", help="OpenIO front port")
+    options, _ = parser.parse_args()
+    return options
+
+options = parse()
+
+OIONS = options.namespace or 'OPENIO'
+OIOACCOUNT = options.account or 'default'
+OIOPROXY = options.url or 'localhost:6006'
+FRONTPORT = options.port or 8282
 
 random_chars = string.ascii_lowercase + string.ascii_uppercase +\
             string.digits
@@ -28,21 +43,16 @@ def random_str(n, chars=random_chars):
 class MainHandler(tornado.web.RequestHandler):
     def initialize(self, oions, oioaccount, oioproxy):
         self.oions = oions
-        print self.oions
         self.oioaccount = oioaccount
-        print self.oioaccount
         self.oioproxy = oioproxy
     def get(self):
-        print "NS: %s"%self.oions
-        print self.oioaccount
-        print self.oioproxy
         #self.write(self.request.uri)
 
         self.set_header("Access-Control-Allow-Origin", "*")
         contentL_present = 0
         multidescr = 0
         mime_type = ""
-        storage = ObjectStorageAPI(self.oions, "http://192.168.1.174:6006")
+        storage = ObjectStorageAPI(self.oions, "http://%s"%self.oioproxy)
         #http_client = AsyncHTTPClient()
         http_client = HTTPClient()
         container = self.request.uri.split("/")[1]
@@ -89,7 +99,7 @@ def make_app():
     args = {
         'oions': OIONS,
         'oioaccount': OIOACCOUNT,
-        'oioproxy': "192.168.1.174"
+        'oioproxy': OIOPROXY
         }
     return tornado.web.Application([
         (r"/.*$", MainHandler, args),
@@ -98,10 +108,10 @@ def make_app():
 if __name__ == "__main__":
     enable_pretty_logging()
     server = tornado.httpserver.HTTPServer(make_app())
-    server.bind(8282)
+    server.bind(FRONTPORT)
     server.start(0)
     try:        
-        print 'running on port %s' % 8282
+        print 'running on port %s' % FRONTPORT
         tornado.ioloop.IOLoop.instance().start()
 
     except KeyboardInterrupt:
