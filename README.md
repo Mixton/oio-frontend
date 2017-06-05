@@ -3,6 +3,8 @@ python tornado frontend for OpenIO SDS
 
 A web server to access to your OpenIO data: http://ip:port/container/object
 
+You will need an OpenIO cluster up and rucan try the docker container http://docs.openio.io/docker-image/)
+
 This is a demo, feel free to improve it.
 
 ```sh
@@ -45,4 +47,10 @@ $ yum -y install openio-sds-server-3.2.3-1.el7.oio.x86_64
 
 ```sh
 git clone [this repo]
+```
+
+Then run it!  
+e.g.
+```sh
+python oio-front.py -n OPENIO -a video_account -u 192.168.1.174:6006 -p 8282
 ```
