@@ -8,13 +8,11 @@ import tornado.httpserver
 #from tornado.httpclient import AsyncHTTPClient
 from oio.api.object_storage import ObjectStorageAPI
 from tornado.httpclient import HTTPClient, HTTPError, AsyncHTTPClient
-from PIL import Image
 import random
 import string
 from tornado.log import enable_pretty_logging
 import json
 import time
-import cStringIO as StringIO
 import optparse
 
 
