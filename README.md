@@ -31,18 +31,22 @@ Install OpenIO SDS SDK
 
 Debian/Ubuntu:
 
+Follow the doc until the "puppet manifest" section  
+http://docs.openio.io/17.04/install-guide-ubuntu/installation.html
+
+Then run:
 ```sh
-$ echo "deb http://mirror.openio.io/pub/repo/openio/sds/16.10/$(lsb_release -i -s)/ $(lsb_release -c -s)/" | sudo tee /etc/apt/sources.list.d/openio-sds.list
-$ sudo apt-get install curl -y
-$ curl http://mirror.openio.io/pub/repo/openio/APT-GPG-KEY-OPENIO-0 | sudo apt-key add -
-$ sudo apt-get update; sudo apt-get install openio-sds
+apt-get install -y openio-sds-server
 ```
 
 Centos:
 
+Follow the doc until the "puppet manifest" section  
+http://docs.openio.io/17.04/install-guide-centos/installation.html
+
+Then run:
 ```sh
-$ yum -y install http://mirror.openio.io/pub/repo/openio/sds/16.10/el/openio-sds-release-16.10-1.el.noarch.rpm
-$ yum -y install openio-sds-server-3.2.3-1.el7.oio.x86_64
+yum install -y openio-sds-server
 ```
 
 ```sh
